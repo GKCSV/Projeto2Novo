@@ -4,6 +4,10 @@ palavra_secreta_jogador2 = 'morango'
 letras_acertadas_jogador1 = ['_' for letra in palavra_secreta_jogador1]
 letras_acertadas_jogador2 = ['_' for letra in palavra_secreta_jogador2]
 
+lista_erros_jogador1 = []
+lista_erros_jogador2 = []
+
+
 
 def imprimir_msg_abertura():
     print('*****************************************')
@@ -14,70 +18,160 @@ def imprimir_msg_abertura():
 
     print('\nVocê começa jogador1')
 
-    p1jogando()
 
 
-def desenha_forca(erros):
+def ganhou_jogador2():
+    acertou_j2 = '_' not in letras_acertadas_jogador2
+
+    if acertou_j2:
+        print('Você ganhou jogador2, parabéns!')
+        print('***FIM DO JOGO***')
+        jogar_novamente()
+
+def perdeu_jogador2():
+    enforcou_j2 = len(lista_erros_jogador2) == len(palavra_secreta_jogador2)
+
+    if enforcou_j2:
+        print('Poxa vida, você perdeu jogador 2!')
+        jogar_novamente()
+
+
+def contador_lista_erros_jogador1(chute, lista_erros_jogador1):
+    if chute not in palavra_secreta_jogador1:
+        lista_erros_jogador1.append(chute)
+        print(lista_erros_jogador1)
+        print('Ops, você errou! Faltam {} tentativas'.format(len(palavra_secreta_jogador1) - len(lista_erros_jogador1)))
+        desenha_forca_j1(len(lista_erros_jogador1))
+
+        print('Vez do jogador 2:')
+        p2jogando()
+
+
+
+def contador_lista_erros_jogador2(chute, lista_erros_jogador2):
+    if chute not in palavra_secreta_jogador2:
+        lista_erros_jogador2.append(chute)
+        while (len(lista_erros_jogador2) < len(palavra_secreta_jogador2)):
+            print(lista_erros_jogador2)
+            print('Ops, você errou! Faltam {} tentativas'.format(len(palavra_secreta_jogador2) - len(lista_erros_jogador2)))
+            desenha_forca_j2(len(lista_erros_jogador2))
+
+            print('Vez do jogador 1:')
+            p1jogando()
+
+
+def desenha_forca_j1(lista_erros_jogador1):
     print("  _______     ")
     print(" |/      |    ")
 
-    if (erros == 1):
+    if lista_erros_jogador1 == 1:
         print(" |      (_)   ")
         print(" |            ")
         print(" |            ")
         print(" |            ")
 
-    if (erros == 2):
+    if lista_erros_jogador1 == 2:
         print(" |      (_)   ")
         print(" |      \     ")
         print(" |            ")
         print(" |            ")
 
-    if (erros == 3):
+    if lista_erros_jogador1 == 3:
         print(" |      (_)   ")
         print(" |      \|    ")
         print(" |            ")
         print(" |            ")
 
-    if (erros == 4):
+    if lista_erros_jogador1 == 4:
         print(" |      (_)   ")
         print(" |      \|/   ")
         print(" |            ")
         print(" |            ")
 
-    if (erros == 5):
+    if lista_erros_jogador1 == 5:
         print(" |      (_)   ")
         print(" |      \|/   ")
         print(" |       |    ")
         print(" |            ")
 
-    if (erros == 6):
+    if lista_erros_jogador1 == 6:
         print(" |      (_)   ")
         print(" |      \|/   ")
         print(" |       |    ")
         print(" |      /     ")
 
-    if (erros == 7):
+    if lista_erros_jogador1 == 7:
         print(" |      (_)   ")
         print(" |      \|/   ")
         print(" |       |    ")
         print(" |      / \   ")
+        print('ENFORCADO JOGADOR 1')
 
     print(" |            ")
     print("_|___         ")
-    print()
+
+
+
+def desenha_forca_j2(lista_erros_jogador2):
+    print("  _______     ")
+    print(" |/      |    ")
+
+    if lista_erros_jogador2 == 1:
+        print(" |      (_)   ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+
+    if lista_erros_jogador2 == 2:
+        print(" |      (_)   ")
+        print(" |      \     ")
+        print(" |            ")
+        print(" |            ")
+
+    if lista_erros_jogador2 == 3:
+        print(" |      (_)   ")
+        print(" |      \|    ")
+        print(" |            ")
+        print(" |            ")
+
+    if lista_erros_jogador2 == 4:
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |            ")
+        print(" |            ")
+
+    if lista_erros_jogador2 == 5:
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |            ")
+
+    if lista_erros_jogador2 == 6:
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      /     ")
+
+    if lista_erros_jogador2 == 7:
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      / \   ")
+        print('ENFORCADO JOGADOR 2')
+
+    print(" |            ")
+    print("_|___         ")
 
 
 def p1jogando():
     enforcou_jogador1 = False
     acertou_jogador1 = False
-    erros_jogador1 = 0
 
     while not acertou_jogador1 and not enforcou_jogador1:
         p1jogando = True
-        p2jogando = False
 
         while p1jogando:
+            print(palavra_secreta_jogador1)
             chute = str(input('Qual letra:')).lower().strip()
             if chute in palavra_secreta_jogador1:
                 indice = 0
@@ -86,60 +180,71 @@ def p1jogando():
                         letras_acertadas_jogador1[indice] = letra
                     indice += 1
                 print(letras_acertadas_jogador1)
+            
+            if (len(lista_erros_jogador1) == len(palavra_secreta_jogador1)):
+                enforcou_jogador1 = True
+                print('Poxa vida, você perdeu jogador 1!')
+                jogar_novamente()
+            
+            if '_' not in letras_acertadas_jogador1:
+                acertou_jogador1 = True
+                print('Você ganhou jogador 1, parabéns!')
+                print('***FIM DO JOGO***')
+                jogar_novamente()
 
             else:
-                erros_jogador1 += 1
-                print('Ops, você errou! Faltam {} tentativas'.format(len(palavra_secreta_jogador1) - erros_jogador1))
-                desenha_forca(erros_jogador1)
+                contador_lista_erros_jogador1(chute, lista_erros_jogador1)
+            
+    p1jogando = False
 
-                print('Vez do jogador 2:')
-                p1jogando = False
-                p2jogando = True
-
-            enforcou_jogador1 = erros_jogador1 == len(palavra_secreta_jogador1)
-            acertou_jogador1 = '_' not in letras_acertadas_jogador1
-
-            if acertou_jogador1:
-                print('Você ganhou jogador1, parabéns!')
-                print('***FIM DO JOGO***')
-                break
-
-            elif enforcou_jogador1:
-                print('Poxa vida, você perdeu!')
 
 
 def p2jogando():
     enforcou_jogador2 = False
     acertou_jogador2 = False
-    erros_jogador2 = 0
 
-    while p2jogando:
-        chute = str(input('Qual letra:')).lower().strip()
+    while not acertou_jogador2 and not enforcou_jogador2:
+        p2jogando = True
 
-        if chute in palavra_secreta_jogador2:
-            indice = 0
-            for letra in palavra_secreta_jogador2:
-                if chute == letra:
-                    letras_acertadas_jogador2[indice] = letra
-                indice += 1
-            print(letras_acertadas_jogador2)
+        while p2jogando:
+            print(palavra_secreta_jogador2)
+            chute = str(input('Qual letra:')).lower().strip()
 
-        else:
-            erros_jogador2 += 1
-            print('Ops, você errou! Faltam {} tentativas'.format(len(palavra_secreta_jogador2) - erros_jogador2))
-            desenha_forca(erros_jogador2)
+            if chute in palavra_secreta_jogador2:
+                indice = 0
+                for letra in palavra_secreta_jogador2:
+                    if chute == letra:
+                        letras_acertadas_jogador2[indice] = letra
+                    indice += 1
+                print(letras_acertadas_jogador2)
 
-            print('Vez do jogador 1:')
-            p2jogando = False
-            p1jogando = True
+            if (len(lista_erros_jogador2) == len(palavra_secreta_jogador2)):
+                enforcou_jogador2 = True
+                print('Poxa vida, você perdeu jogador 2!')
+                jogar_novamente()
+    
+            if '_' not in letras_acertadas_jogador2:
+                acertou_jogador2 = True
+                print('Você ganhou jogador 2, parabéns!')
+                print('***FIM DO JOGO***')
+                jogar_novamente()
 
-        enforcou_jogador2 = erros_jogador2 == len(palavra_secreta_jogador2)
-        acertou_jogador2 = '_' not in letras_acertadas_jogador2
+            else:
+                contador_lista_erros_jogador2(chute, lista_erros_jogador2)
 
-        if acertou_jogador2:
-            print('Você ganhou jogador2, parabéns!')
-            print('***FIM DO JOGO***')
-            break
+    p2jogando = False
 
-        elif enforcou_jogador2:
-            print('Poxa vida, você perdeu!')
+
+def jogar_novamente():
+    resposta_jogarnovamente = input('Deseja jogar novamente? [S/N]')
+    if (resposta_jogarnovamente).upper() == 'S':
+        #principal_forca_multiplayer
+        print('carregar jogo...')
+    
+    elif (resposta_jogarnovamente).upper() == 'N':
+        print('Até a próxima!')
+        exit()
+    
+    else:
+        print('Digite uma resposta válida!')
+        jogar_novamente()
