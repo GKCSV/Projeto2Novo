@@ -1,3 +1,5 @@
+from principal_forca_multiplayer import main
+
 palavra_secreta_jogador1 = 'abacate'
 palavra_secreta_jogador2 = 'morango'
 
@@ -7,6 +9,8 @@ letras_acertadas_jogador2 = ['_' for letra in palavra_secreta_jogador2]
 lista_erros_jogador1 = []
 lista_erros_jogador2 = []
 
+def jogar():
+    imprimir_msg_abertura()
 
 
 def imprimir_msg_abertura():
@@ -19,7 +23,6 @@ def imprimir_msg_abertura():
     print('\nVocê começa jogador1')
 
 
-
 def ganhou_jogador2():
     acertou_j2 = '_' not in letras_acertadas_jogador2
 
@@ -27,6 +30,7 @@ def ganhou_jogador2():
         print('Você ganhou jogador2, parabéns!')
         print('***FIM DO JOGO***')
         jogar_novamente()
+
 
 def perdeu_jogador2():
     enforcou_j2 = len(lista_erros_jogador2) == len(palavra_secreta_jogador2)
@@ -171,7 +175,6 @@ def p1jogando():
         p1jogando = True
 
         while p1jogando:
-            print(palavra_secreta_jogador1)
             chute = str(input('Qual letra:')).lower().strip()
             if chute in palavra_secreta_jogador1:
                 indice = 0
@@ -207,7 +210,6 @@ def p2jogando():
         p2jogando = True
 
         while p2jogando:
-            print(palavra_secreta_jogador2)
             chute = str(input('Qual letra:')).lower().strip()
 
             if chute in palavra_secreta_jogador2:
@@ -238,8 +240,9 @@ def p2jogando():
 def jogar_novamente():
     resposta_jogarnovamente = input('Deseja jogar novamente? [S/N]')
     if (resposta_jogarnovamente).upper() == 'S':
-        #principal_forca_multiplayer
-        print('carregar jogo...')
+        lista_erros_jogador1.clear()
+        lista_erros_jogador2.clear()
+        main()
     
     elif (resposta_jogarnovamente).upper() == 'N':
         print('Até a próxima!')
@@ -248,3 +251,8 @@ def jogar_novamente():
     else:
         print('Digite uma resposta válida!')
         jogar_novamente()
+
+
+
+if (__name__ == '__main__'):
+    jogar()
