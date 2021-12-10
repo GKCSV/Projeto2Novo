@@ -1,48 +1,46 @@
-comidas = {1:'abacate',
-    2:'banana',3:'morango',
-    4:'tabasco',5:'abobrinha',
-    6:'lentilhas',7:'damasco',
-    8:'aveia',9: 'aspargos',10:'tomate'
-    }
-
-paises = {1:'lesoto',2:'eswatini',
-          3:'mianmar',4:'filipinas',
-          5:'letonia',6:'letonia',
-          7:'madagascar',7:'guatemala',
-          8:'lituania',9:'laos',
-          10:'botsuana'
-          }
-
-palavras = {1:'anticonstitucionalissimamente',
-            2:'paraclorobenzilpirrolidinonetilbenzimidazol',
-            3:'xaropear', 4:'quintessencia',5:'vicissitude',
-            6:'tergiversar',7:'putrefato',8:'verossimilhança',
-            9:'zaragatoa',10:'hipopotomonstrosesquipedaliofobia'
-}
-
-def apresenta_níveis():
-    print('[1]Fácil [Frutas]\n [2]Médio [Países]\n[3]Difícil [Palavras)')
-
-def escolha_tema():
-    escolha_palavra = int(input('Escolha um nível de dificuldade:'))
-    if escolha_palavra == 1:
-        print('Você escolheu o nível Fácil com o tema Frutas!')
-        #importdicionário do tema
-    if escolha_palavra == 2:
-        print('Você escolheu o nível Médio com o tema Países!')
-        # importdicionário do tema
-    if escolha_palavra == 3:
-        print('Você escolheu o nível Difícil com o tema Palavras!')
-        # importdicionário do tema
-
-def escolha_palavra_dicionário_1():
-    escolha_palavra = int(input('Escolha um n° de 1 a 10 e sortearemos uma palavra:'))
-    if escolha_palavra in comidas.items():
-
-
 from principal_forca_multiplayer import main
 from time import sleep
 from termcolor import cprint
+def dicionario_comidas():
+    comidas = {1:'abacate',
+        2:'banana',3:'morango',
+        4:'tabasco',5:'abobrinha',
+        6:'lentilhas',7:'damasco',
+        8:'aveia',9: 'aspargos',10:'tomate'
+        }
+def dicionario_paises():
+    paises = {1:'lesoto',2:'eswatini',
+              3:'mianmar',4:'filipinas',
+              5:'letonia',6:'letonia',
+              7:'madagascar',7:'guatemala',
+              8:'lituania',9:'laos',
+              10:'botsuana'
+              }
+def dicionario_palavras():
+    palavras = {1:'anticonstitucionalissimamente',
+                2:'paraclorobenzilpirrolidinonetilbenzimidazol',
+                3:'xaropear', 4:'quintessencia',5:'vicissitude',
+                6:'tergiversar',7:'putrefato',8:'verossimilhança',
+                9:'zaragatoa',10:'hipopotomonstrosesquipedaliofobia'
+    }
+
+def pergunta_escolha_tema():
+    lista_com_tema_escolhido= []
+    escolha_tema = int(input('Escolha um nível de dificuldade:'))
+    if escolha_tema == 1:
+            print('Você escolheu o nível Fácil com o tema Frutas!')
+            return lista_com_tema_escolhido.append(dicionario_comidas())
+    if escolha_tema == 2:
+            print('Você escolheu o nível Médio com o tema Países!')
+            return lista_com_tema_escolhido.append(dicionario_paises())
+    if escolha_tema == 3:
+            print('Você escolheu o nível Difícil com o tema Palavras!')
+            return lista_com_tema_escolhido.append(dicionario_palavras())
+
+def pergunta_escolha_palavra():
+    escolha_palavra = lista_com_tema_escolhido[0][randint(1,10)]
+    return(escolha_palavra)
+
 
 palavra_secreta_jogador1 = 'abacate'
 palavra_secreta_jogador2 = 'morango'
