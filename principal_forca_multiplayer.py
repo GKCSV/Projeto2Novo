@@ -1,5 +1,6 @@
 import funções_forca
 
+
 funções_forca.imprimir_msg_abertura()
 
 jogando = True
