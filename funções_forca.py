@@ -5,66 +5,75 @@ from random import randint
 
 lista_erros_jogador1 = []
 lista_erros_jogador2 = []
-lista_com_tema_escolhido= []
+lista_com_tema_escolhido = []
 
 def dicionario_comidas():
-    comidas = {1:'abacate',
-        2:'banana',3:'morango',
-        4:'tabasco',5:'abobrinha',
-        6:'lentilhas',7:'damasco',
-        8:'aveia',9: 'aspargos',10:'tomate'
-        }
+    comidas = {1: 'abacate',
+               2: 'banana', 3: 'morango',
+               4: 'tabasco', 5: 'abobrinha',
+               6: 'lentilhas', 7: 'damasco',
+               8: 'aveia', 9: 'aspargos', 10: 'tomate'
+               }
     return comidas
 
+
 def dicionario_paises():
-    paises = {1:'lesoto',2:'eswatini',
-              3:'mianmar',4:'filipinas',
-              5:'letonia',6:'letonia',
-              7:'madagascar',7:'guatemala',
-              8:'lituania',9:'laos',
-              10:'botsuana'
+    paises = {1: 'lesoto', 2: 'eswatini',
+              3: 'mianmar', 4: 'filipinas',
+              5: 'letonia', 6: 'letonia',
+              7: 'madagascar', 7: 'guatemala',
+              8: 'lituania', 9: 'laos',
+              10: 'botsuana'
               }
     return paises
 
+
 def dicionario_palavras():
-    palavras = {1:'anticonstitucionalissimamente',
-                2:'paraclorobenzilpirrolidinonetilbenzimidazol',
-                3:'xaropear', 4:'quintessencia',5:'vicissitude',
-                6:'tergiversar',7:'putrefato',8:'verossimilhança',
-                9:'zaragatoa',10:'hipopotomonstrosesquipedaliofobia'
-    }
+    palavras = {1: 'anticonstitucionalissimamente',
+                2: 'paraclorobenzilpirrolidinonetilbenzimidazol',
+                3: 'xaropear', 4: 'quintessencia', 5: 'vicissitude',
+                6: 'tergiversar', 7: 'putrefato', 8: 'verossimilhança',
+                9: 'zaragatoa', 10: 'hipopotomonstrosesquipedaliofobia'
+                }
     return palavras
 
+
 def pergunta_escolha_tema():
+    dicionario_atual = {}
     escolha_tema = int(input('Escolha um nível de dificuldade:'))
     if escolha_tema == 1:
-            print('Você escolheu o nível Fácil com o tema Frutas!')
-            lista_com_tema_escolhido.append(dicionario_paises())
-            print(lista_com_tema_escolhido)
+        print('Você escolheu o nível Fácil com o tema Frutas!')
+        dicionario_atual = dicionario_comidas()
+
     if escolha_tema == 2:
-            print('Você escolheu o nível Médio com o tema Países!')
-            lista_com_tema_escolhido.append(dicionario_paises())
-            print(lista_com_tema_escolhido)
+        print('Você escolheu o nível Médio com o tema Países!')
+        dicionario_atual = dicionario_paises()
+
     if escolha_tema == 3:
-            print('Você escolheu o nível Difícil com o tema Palavras!')
-            lista_com_tema_escolhido.append(dicionario_palavras())
-            print(lista_com_tema_escolhido)
-    
-    palavra_escolhida = int(input('Digite um nº de 1 a 10 e sortearemos uma palavra:'))
-    palavra_escolhida = lista_com_tema_escolhido[0][palavra_escolhida]
+        print('Você escolheu o nível Difícil com o tema Palavras!')
+        dicionario_atual = dicionario_palavras()
+
+    print(dicionario_atual)
+
+    palavra_escolhida = int(
+        input('Digite um nº de 1 a 10 e sortearemos uma palavra:'))
+    palavra_escolhida = dicionario_atual[palavra_escolhida]
     print(palavra_escolhida)
-
-
-palavra_secreta_jogador1 = 'abacate'
-palavra_secreta_jogador2 = 'morango'
-
-letras_acertadas_jogador1 = ['_' for letra in palavra_secreta_jogador1]
-letras_acertadas_jogador2 = ['_' for letra in palavra_secreta_jogador2]
+    return palavra_escolhida
 
 
 def jogar():
     abertura()
     imprimir_msg_abertura()
+    global palavra_secreta_jogador1
+    global palavra_secreta_jogador2
+    global letras_acertadas_jogador1
+    global letras_acertadas_jogador2
+
+    palavra_secreta_jogador1 = pergunta_escolha_tema()
+    palavra_secreta_jogador2 = pergunta_escolha_tema()
+    letras_acertadas_jogador1 = ['_' for letra in palavra_secreta_jogador1]
+    letras_acertadas_jogador2 = ['_' for letra in palavra_secreta_jogador2]
 
 
 def abertura():
@@ -88,13 +97,12 @@ def imprimir_msg_abertura():
     print('\nVocê começa jogador1\n')
     sleep(1)
 
-    pergunta_escolha_tema()
-
 
 def contador_lista_erros_jogador1(chute, lista_erros_jogador1):
     if chute not in palavra_secreta_jogador1:
         lista_erros_jogador1.append(chute)
-        print('Ops, você errou! Faltam {} tentativas'.format(len(palavra_secreta_jogador1) - len(lista_erros_jogador1)))
+        print('Ops, você errou! Faltam {} tentativas'.format(
+            len(palavra_secreta_jogador1) - len(lista_erros_jogador1)))
         sleep(1)
         desenha_forca_j1(len(lista_erros_jogador1))
 
@@ -106,7 +114,8 @@ def contador_lista_erros_jogador2(chute, lista_erros_jogador2):
     if chute not in palavra_secreta_jogador2:
         lista_erros_jogador2.append(chute)
         while (len(lista_erros_jogador2) < len(palavra_secreta_jogador2)):
-            print('Ops, você errou! Faltam {} tentativas'.format(len(palavra_secreta_jogador2) - len(lista_erros_jogador2)))
+            print('Ops, você errou! Faltam {} tentativas'.format(
+                len(palavra_secreta_jogador2) - len(lista_erros_jogador2)))
             sleep(1)
             desenha_forca_j2(len(lista_erros_jogador2))
 
@@ -165,7 +174,6 @@ def desenha_forca_j1(lista_erros_jogador1):
     print(" |            ")
     print("_|___         ")
     sleep(0.5)
-
 
 
 def desenha_forca_j2(lista_erros_jogador2):
@@ -236,6 +244,7 @@ def p1jogando():
                 indice = 0
                 for letra in palavra_secreta_jogador1:
                     if chute == letra:
+                        print(indice)
                         letras_acertadas_jogador1[indice] = letra
                     indice += 1
 
@@ -250,7 +259,6 @@ def p1jogando():
                 contador_lista_erros_jogador1(chute, lista_erros_jogador1)
 
     p1jogando = False
-
 
 
 def p2jogando():
@@ -322,7 +330,6 @@ def mensagem_enforcou_j1(palavra_secreta_jogador1):
     print("   \_             _/       ")
     print("     \_         _/         ")
     print("       \_______/           ")
-
 
 
 def mensagem_enforcou_j2(palavra_secreta_jogador2):
