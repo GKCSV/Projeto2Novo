@@ -38,7 +38,7 @@ def dicionario_palavras():
 
 def pergunta_escolha_tema_j1():
     dicionario_atual = {}
-    escolha_tema = int(input('Escolha um nível de dificuldade, jogador1 | \n[1] Fácil [2] Médio [3] Difícil:'))
+    escolha_tema = int(input('Escolha um nível de dificuldade, Jogador1 \n[1] Fácil [2] Médio [3] Difícil:'))
     if escolha_tema == 1:
         print('\nJogador 1, você escolheu o nível fácil com o tema Frutas!')
         dicionario_atual = dicionario_comidas()
@@ -52,13 +52,15 @@ def pergunta_escolha_tema_j1():
         dicionario_atual = dicionario_palavras()
 
     palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra, Jogador 1:\n'))
+    cprint('-'* 80, 'blue')
     palavra_escolhida = dicionario_atual[palavra_escolhida]
     return palavra_escolhida
 
 
 def pergunta_escolha_tema_j2():
+    print('Jogador 2\n')
     dicionario_atual = {}
-    escolha_tema = int(input('\nEscolha um nível de dificuldade, jogador 2 | \n[1] Fácil [2] Médio [3] Difícil:'))
+    escolha_tema = int(input('Escolha um nível de dificuldade, Jogador 2 \n[1] Fácil [2] Médio [3] Difícil:'))
     if escolha_tema == 1:
         print('\nJogador 2, você escolheu o nível fácil com o tema Frutas!')
         dicionario_atual = dicionario_comidas()
@@ -72,6 +74,7 @@ def pergunta_escolha_tema_j2():
         dicionario_atual = dicionario_palavras()
 
     palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra, Jogador 2:\n'))
+    cprint('-'* 80, 'blue')
     palavra_escolhida = dicionario_atual[palavra_escolhida]
     return palavra_escolhida
 
@@ -105,10 +108,17 @@ def imprimir_msg_abertura():
     print('*****************************************')
     sleep(2)
 
+    print('\nNinguém tem a menor ideia de quem inventou esse jogo simples,')
+    sleep(1)
+    print('dizem que ele surgiu na Inglaterra, mas seu primeiro registro oficial')
+    sleep(1)
+    print('data de 1894 no livro “Traditional Games”')
+    sleep(1)
+
     print('\nEste é um jogo para dois jogadores, chame seu adversário e que vença o melhor!')
     sleep(1)
 
-    print('\nVocê começa jogador1\n')
+    print('\nVocê começa Jogador 1\n')
     sleep(1)
 
 
@@ -121,7 +131,7 @@ def contador_lista_erros_jogador1(chute, lista_erros_jogador1):
             sleep(1)
             desenha_forca_j1(len(lista_erros_jogador1))
 
-            print('\nVez do jogador 2:\n')
+            print('\nVez do Jogador 2:\n')
             p2jogando()
 
 
@@ -134,7 +144,7 @@ def contador_lista_erros_jogador2(chute, lista_erros_jogador2):
             sleep(1)
             desenha_forca_j2(len(lista_erros_jogador2))
 
-            print('\nVez do jogador 1:\n')
+            print('\nVez do Jogador 1:\n')
             p1jogando()
 
 
@@ -252,6 +262,7 @@ def p1jogando():
         p1jogando = True
 
         while p1jogando:
+            print('\nJogador 1\n')
             print(letras_acertadas_jogador1)
             chute = str(input('\nQual letra:')).lower().strip()
 
@@ -284,6 +295,7 @@ def p2jogando():
         p2jogando = True
 
         while p2jogando:
+            print('\nJogador 2\n')
             print(letras_acertadas_jogador2)
             chute = str(input('\nQual letra:')).lower().strip()
 
@@ -325,7 +337,7 @@ def jogar_novamente():
 
 
 def mensagem_enforcou_j1(palavra_secreta_jogador1):
-    print('\nPoxa vida, você perdeu jogador 1!')
+    print('\nPoxa vida, você perdeu Jogador 1!')
     sleep(0.5)
     print(f'A palavra era: {palavra_secreta_jogador1.upper()}')
     sleep(0.5)
@@ -348,7 +360,7 @@ def mensagem_enforcou_j1(palavra_secreta_jogador1):
 
 
 def mensagem_enforcou_j2(palavra_secreta_jogador2):
-    print('\nPoxa vida, você perdeu jogador 2!')
+    print('\nPoxa vida, você perdeu Jogador 2!')
     sleep(0.5)
     print(f'A palavra era {palavra_secreta_jogador2.upper()}')
     sleep(0.5)
@@ -373,7 +385,7 @@ def mensagem_enforcou_j2(palavra_secreta_jogador2):
 
 
 def mensagem_acertou_j1():
-    print("\nParabéns, você ganhou jogador 1!")
+    print("\nParabéns, você ganhou Jogador 1!")
     sleep(1)
     print("       ___________      ")
     print("      '._==_==_=_.'     ")
@@ -391,7 +403,7 @@ def mensagem_acertou_j1():
 
 
 def mensagem_acertou_j2():
-    print("\nParabéns, você ganhou jogador 2!")
+    print("\nParabéns, você ganhou Jogador 2!")
     sleep(1)
     print("       ___________      ")
     print("      '._==_==_=_.'     ")
