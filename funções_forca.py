@@ -40,41 +40,41 @@ def pergunta_escolha_tema_j1():
     dicionario_atual = {}
     escolha_tema = int(input('Escolha um nível de dificuldade, Jogador1 \n[1] Fácil [2] Médio [3] Difícil:'))
     if escolha_tema == 1:
-        print('\nJogador 1, você escolheu o nível fácil com o tema Frutas!')
+        print('\nJOGADOR 1, você escolheu o nível fácil com o tema Frutas!')
         dicionario_atual = dicionario_comidas()
 
     if escolha_tema == 2:
-        print('\nJogador 1, você escolheu o nível médio com o tema Países!')
+        print('\nJOGADOR 1, você escolheu o nível médio com o tema Países!')
         dicionario_atual = dicionario_paises()
 
     if escolha_tema == 3:
-        print('\nJogador 1, você escolheu o nível difícil com o tema Palavras!')
+        print('\nJOGADOR 1, você escolheu o nível difícil com o tema Palavras!')
         dicionario_atual = dicionario_palavras()
 
-    palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra, Jogador 1:\n'))
-    cprint('-'* 80, 'blue')
+    palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra, JOGADOR 1:\n'))
+    print('-='* 35)
     palavra_escolhida = dicionario_atual[palavra_escolhida]
     return palavra_escolhida
 
 
 def pergunta_escolha_tema_j2():
-    print('Jogador 2\n')
+    cprint('JOGADOR 2\n', 'red')
     dicionario_atual = {}
-    escolha_tema = int(input('Escolha um nível de dificuldade, Jogador 2 \n[1] Fácil [2] Médio [3] Difícil:'))
+    escolha_tema = int(input('Escolha um nível de dificuldade, JOGADOR 2 \n[1] Fácil [2] Médio [3] Difícil:'))
     if escolha_tema == 1:
-        print('\nJogador 2, você escolheu o nível fácil com o tema Frutas!')
+        print('\nJOGADOR 2, você escolheu o nível fácil com o tema Frutas!')
         dicionario_atual = dicionario_comidas()
 
     if escolha_tema == 2:
-        print('\nJogador 2, você escolheu o nível médio com o tema Países!')
+        print('\nJOGADOR 2, você escolheu o nível médio com o tema Países!')
         dicionario_atual = dicionario_paises()
 
     if escolha_tema == 3:
-        print('\nJogador 2, você escolheu o nível difícil com o tema Palavras!')
+        print('\nJOGADOR 2, você escolheu o nível difícil com o tema Palavras!')
         dicionario_atual = dicionario_palavras()
 
-    palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra, Jogador 2:\n'))
-    cprint('-'* 80, 'blue')
+    palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra, JOGADOR 2:\n'))
+    print('-='* 35)
     palavra_escolhida = dicionario_atual[palavra_escolhida]
     return palavra_escolhida
 
@@ -118,7 +118,7 @@ def imprimir_msg_abertura():
     print('\nEste é um jogo para dois jogadores, chame seu adversário e que vença o melhor!')
     sleep(1)
 
-    print('\nVocê começa Jogador 1\n')
+    print('\nVocê começa JOGADOR 1\n')
     sleep(1)
 
 
@@ -131,7 +131,7 @@ def contador_lista_erros_jogador1(chute, lista_erros_jogador1):
             sleep(1)
             desenha_forca_j1(len(lista_erros_jogador1))
 
-            print('\nVez do Jogador 2:\n')
+            print('\nVez do JOGADOR 2:\n')
             p2jogando()
 
 
@@ -144,7 +144,7 @@ def contador_lista_erros_jogador2(chute, lista_erros_jogador2):
             sleep(1)
             desenha_forca_j2(len(lista_erros_jogador2))
 
-            print('\nVez do Jogador 1:\n')
+            print('\nVez do JOGADOR 1:\n')
             p1jogando()
 
 
@@ -262,8 +262,9 @@ def p1jogando():
         p1jogando = True
 
         while p1jogando:
-            print('\nJogador 1\n')
-            print(letras_acertadas_jogador1)
+            cprint('\nJOGADOR 1\n', 'blue')
+            cprint(letras_acertadas_jogador1, 'blue')
+            cprint(f'\nLista de chutes errados, JOGADOR 1:{lista_erros_jogador1}','yellow')
             chute = str(input('\nQual letra:')).lower().strip()
 
             if chute in palavra_secreta_jogador1:
@@ -295,8 +296,9 @@ def p2jogando():
         p2jogando = True
 
         while p2jogando:
-            print('\nJogador 2\n')
-            print(letras_acertadas_jogador2)
+            cprint('\nJOGADOR 2\n', 'red')
+            cprint(letras_acertadas_jogador2, 'red')
+            cprint(f'\nLista de chutes errados, JOGADOR 2:{lista_erros_jogador2}','yellow')
             chute = str(input('\nQual letra:')).lower().strip()
 
             if chute in palavra_secreta_jogador2:
@@ -337,84 +339,86 @@ def jogar_novamente():
 
 
 def mensagem_enforcou_j1(palavra_secreta_jogador1):
-    print('\nPoxa vida, você perdeu Jogador 1!')
+    print('\nPoxa vida, você perdeu JOGADOR 1!')
     sleep(0.5)
     print(f'A palavra era: {palavra_secreta_jogador1.upper()}')
     sleep(0.5)
-    print("\n    _______________         ")
-    print("   /               \       ")
-    print("  /                 \      ")
-    print("//                   \/\  ")
-    print("\|   XXXX     XXXX   | /   ")
-    print(" |   XXXX     XXXX   |/     ")
-    print(" |   XXX       XXX   |      ")
-    print(" |                   |      ")
-    print(" \__      XXX      __/     ")
-    print("   |\     XXX     /|       ")
-    print("   | |           | |        ")
-    print("   | I I I I I I I |        ")
-    print("   |  I I I I I I  |        ")
-    print("   \_             _/       ")
-    print("     \_         _/         ")
-    print("       \_______/           ")
+    cprint("\n       @@@@@@@@@@@@@@@@@@", 'red')
+    cprint("     @@@@@@@@@@@@@@@@@@@@@@@", 'red')
+    cprint("   @@@@@@@@@@@@@@@@@@@@@@@@@@@", 'red')
+    cprint("  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@", 'red')
+    cprint(" @@@@@@@@@@@@@@@/      \@@@/   @", 'red')
+    cprint("@@@@@@@@@@@@@@@@\      @@  @___@", 'red')
+    cprint("@@@@@@@@@@@@@ @@@@@@@@@@  | \@@@@@", 'red')
+    cprint("@@@@@@@@@@@@@ @@@@@@@@@\__@_/@@@@@", 'red')
+    cprint(" @@@@@@@@@@@@@@@/,/,/./'/_|.\\,\'", 'red')
+    cprint("   @@@@@@@@@@@@@|  | | | | | | | |", 'red')
+    cprint("                 \_|_|_|_|_|_|_|_|", 'red')
 
 
 def mensagem_enforcou_j2(palavra_secreta_jogador2):
-    print('\nPoxa vida, você perdeu Jogador 2!')
+    print('\nPoxa vida, você perdeu JOGADOR 2!')
     sleep(0.5)
     print(f'A palavra era {palavra_secreta_jogador2.upper()}')
     sleep(0.5)
-    print("\n    _______________         ")
-    print("   /               \       ")
-    print("  /                 \      ")
-    print("//                   \/\  ")
-    print("\|   XXXX     XXXX   | /   ")
-    print(" |   XXXX     XXXX   |/     ")
-    print(" |   XXX       XXX   |      ")
-    print(" |                   |      ")
-    print(" \__      XXX      __/     ")
-    print("   |\     XXX     /|       ")
-    print("   | |           | |        ")
-    print("   | I I I I I I I |        ")
-    print("   |  I I I I I I  |        ")
-    print("   \_             _/       ")
-    print("     \_         _/         ")
-    print("       \_______/           ")
+    cprint("\n       @@@@@@@@@@@@@@@@@@", 'red')
+    cprint("     @@@@@@@@@@@@@@@@@@@@@@@", 'red')
+    cprint("   @@@@@@@@@@@@@@@@@@@@@@@@@@@", 'red')
+    cprint("  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@", 'red')
+    cprint(" @@@@@@@@@@@@@@@/      \@@@/   @", 'red')
+    cprint("@@@@@@@@@@@@@@@@\      @@  @___@", 'red')
+    cprint("@@@@@@@@@@@@@ @@@@@@@@@@  | \@@@@@", 'red')
+    cprint("@@@@@@@@@@@@@ @@@@@@@@@\__@_/@@@@@", 'red')
+    cprint(" @@@@@@@@@@@@@@@/,/,/./'/_|.\\,\'", 'red')
+    cprint("   @@@@@@@@@@@@@|  | | | | | | | |", 'red')
+    cprint("                 \_|_|_|_|_|_|_|_|", 'red')
     
     jogar_novamente()
 
 
 def mensagem_acertou_j1():
-    print("\nParabéns, você ganhou Jogador 1!")
+    print("\nParabéns, você ganhou JOGADOR 1!")
     sleep(1)
-    print("       ___________      ")
-    print("      '._==_==_=_.'     ")
-    print("      .-\\:      /-.    ")
-    print("     | (|:.     |) |    ")
-    print("      '-|:.     |-'     ")
-    print("        \\::.    /      ")
-    print("         '::. .'        ")
-    print("           ) (          ")
-    print("         _.' '._        ")
-    print("        '-------'       ")
+    cprint(" _______________", 'yellow')
+    cprint("|@@@@|     |####|", 'yellow')
+    cprint("|@@@@|     |####|", 'yellow')
+    cprint("|@@@@|     |####|", 'yellow')
+    cprint("\@@@@|     |####/", 'yellow')
+    cprint(" \@@@|     |###/", 'yellow')
+    cprint("  `@@|_____|##'", 'yellow')
+    cprint("       (O)", 'yellow')
+    cprint("    .-'''''-.", 'yellow')
+    cprint("  .'  * * *  `.", 'yellow')
+    cprint(" :  *       *  :", 'yellow')
+    cprint(": ~  PARABÉNS ~ :", 'yellow')
+    cprint(": ~ JOGADOR 1 ~ :", 'yellow')
+    cprint(" :  *       *  :", 'yellow')
+    cprint("  `.  * * *  .'", 'yellow')
+    cprint("    `-.....-'", 'yellow')
     sleep(1)
     print('\n*** FIM DE JOGO! ****')
     jogar_novamente()
 
 
 def mensagem_acertou_j2():
-    print("\nParabéns, você ganhou Jogador 2!")
+    print("\nParabéns, você ganhou JOGADOR 2!")
     sleep(1)
-    print("       ___________      ")
-    print("      '._==_==_=_.'     ")
-    print("      .-\\:      /-.    ")
-    print("     | (|:.     |) |    ")
-    print("      '-|:.     |-'     ")
-    print("        \\::.    /      ")
-    print("         '::. .'        ")
-    print("           ) (          ")
-    print("         _.' '._        ")
-    print("        '-------'       ")
+    cprint(" _______________", 'yellow')
+    cprint("|@@@@|     |####|", 'yellow')
+    cprint("|@@@@|     |####|", 'yellow')
+    cprint("|@@@@|     |####|", 'yellow')
+    cprint("\@@@@|     |####/", 'yellow')
+    cprint(" \@@@|     |###/", 'yellow')
+    cprint("  `@@|_____|##'", 'yellow')
+    cprint("       (O)", 'yellow')
+    cprint("    .-'''''-.", 'yellow')
+    cprint("  .'  * * *  `.", 'yellow')
+    cprint(" :  *       *  :", 'yellow')
+    cprint(": ~  PARABÉNS ~ :", 'yellow')
+    cprint(": ~ JOGADOR 2 ~ :", 'yellow')
+    cprint(" :  *       *  :", 'yellow')
+    cprint("  `.  * * *  .'", 'yellow')
+    cprint("    `-.....-'", 'yellow')
     sleep(1)
     print('\n*** FIM DE JOGO! ****')
     jogar_novamente()
