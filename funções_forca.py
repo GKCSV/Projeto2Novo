@@ -21,9 +21,8 @@ def dicionario_paises():
     paises = {1: 'lesoto', 2: 'eswatini',
               3: 'mianmar', 4: 'filipinas',
               5: 'letonia', 6: 'letonia',
-              7: 'madagascar', 7: 'guatemala',
-              8: 'lituania', 9: 'laos',
-              10: 'botsuana'
+              7: 'madagascar', 8: 'lituania',
+              9: 'laos', 10: 'botsuana'
               }
     return paises
 
@@ -40,23 +39,20 @@ def dicionario_palavras():
 
 def pergunta_escolha_tema():
     dicionario_atual = {}
-    escolha_tema = int(input('Escolha um nível de dificuldade:'))
+    escolha_tema = int(input('Escolha um nível de dificuldade \n[1] Fácil [2] Médio [3] Difícil:'))
     if escolha_tema == 1:
-        print('Você escolheu o nível Fácil com o tema Frutas!')
+        print('\nVocê escolheu o nível fácil com o tema Frutas!')
         dicionario_atual = dicionario_comidas()
 
     if escolha_tema == 2:
-        print('Você escolheu o nível Médio com o tema Países!')
+        print('\nVocê escolheu o nível médio com o tema Países!')
         dicionario_atual = dicionario_paises()
 
     if escolha_tema == 3:
-        print('Você escolheu o nível Difícil com o tema Palavras!')
+        print('\nVocê escolheu o nível difícil com o tema Palavras!')
         dicionario_atual = dicionario_palavras()
 
-    print(dicionario_atual)
-
-    palavra_escolhida = int(
-        input('Digite um nº de 1 a 10 e sortearemos uma palavra:'))
+    palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra:'))
     palavra_escolhida = dicionario_atual[palavra_escolhida]
     print(palavra_escolhida)
     return palavra_escolhida
@@ -101,21 +97,22 @@ def imprimir_msg_abertura():
 def contador_lista_erros_jogador1(chute, lista_erros_jogador1):
     if chute not in palavra_secreta_jogador1:
         lista_erros_jogador1.append(chute)
-        print('Ops, você errou! Faltam {} tentativas'.format(
-            len(palavra_secreta_jogador1) - len(lista_erros_jogador1)))
-        sleep(1)
-        desenha_forca_j1(len(lista_erros_jogador1))
+        while (len(lista_erros_jogador1) <= 7):
+            print('Ops, você errou! Faltam {} tentativas'.format(
+                7 - len(lista_erros_jogador1)))
+            sleep(1)
+            desenha_forca_j1(len(lista_erros_jogador1))
 
-        print('\nVez do jogador 2:\n')
-        p2jogando()
+            print('\nVez do jogador 2:\n')
+            p2jogando()
 
 
 def contador_lista_erros_jogador2(chute, lista_erros_jogador2):
     if chute not in palavra_secreta_jogador2:
         lista_erros_jogador2.append(chute)
-        while (len(lista_erros_jogador2) < len(palavra_secreta_jogador2)):
+        while (len(lista_erros_jogador2) <= 7):
             print('Ops, você errou! Faltam {} tentativas'.format(
-                len(palavra_secreta_jogador2) - len(lista_erros_jogador2)))
+                7 - len(lista_erros_jogador2)))
             sleep(1)
             desenha_forca_j2(len(lista_erros_jogador2))
 
@@ -244,12 +241,12 @@ def p1jogando():
                 indice = 0
                 for letra in palavra_secreta_jogador1:
                     if chute == letra:
-                        print(indice)
                         letras_acertadas_jogador1[indice] = letra
                     indice += 1
 
-            if (len(lista_erros_jogador1) == len(palavra_secreta_jogador1)):
+            if (len(lista_erros_jogador1) == 7):
                 enforcou_jogador1 = True
+                mensagem_enforcou_j1()
 
             if '_' not in letras_acertadas_jogador1:
                 acertou_jogador1 = True
@@ -279,8 +276,9 @@ def p2jogando():
                         letras_acertadas_jogador2[indice] = letra
                     indice += 1
 
-            if (len(lista_erros_jogador2) == len(palavra_secreta_jogador2)):
+            if (len(lista_erros_jogador2) == 7):
                 enforcou_jogador2 = True
+                mensagem_enforcou_j2()
 
             if '_' not in letras_acertadas_jogador2:
                 acertou_jogador2 = True
@@ -288,7 +286,6 @@ def p2jogando():
 
             else:
                 contador_lista_erros_jogador2(chute, lista_erros_jogador2)
-                mensagem_enforcou_j2(palavra_secreta_jogador2)
 
     p2jogando = False
 
@@ -353,7 +350,7 @@ def mensagem_enforcou_j2(palavra_secreta_jogador2):
     print("   \_             _/       ")
     print("     \_         _/         ")
     print("       \_______/           ")
-
+    
     jogar_novamente()
 
 
@@ -372,7 +369,7 @@ def mensagem_acertou_j1():
     print("        '-------'       ")
     sleep(1)
     print('\n*** FIM DE JOGO! ****')
-    exit()
+    jogar_novamente()
 
 
 def mensagem_acertou_j2():
@@ -390,7 +387,7 @@ def mensagem_acertou_j2():
     print("        '-------'       ")
     sleep(1)
     print('\n*** FIM DE JOGO! ****')
-    exit()
+    jogar_novamente()
 
 
 if (__name__ == '__main__'):
