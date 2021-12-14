@@ -1,6 +1,59 @@
 from principal_forca_multiplayer import main
 from time import sleep
 from termcolor import cprint
+from random import randint
+
+lista_erros_jogador1 = []
+lista_erros_jogador2 = []
+lista_com_tema_escolhido= []
+
+def dicionario_comidas():
+    comidas = {1:'abacate',
+        2:'banana',3:'morango',
+        4:'tabasco',5:'abobrinha',
+        6:'lentilhas',7:'damasco',
+        8:'aveia',9: 'aspargos',10:'tomate'
+        }
+    return comidas
+
+def dicionario_paises():
+    paises = {1:'lesoto',2:'eswatini',
+              3:'mianmar',4:'filipinas',
+              5:'letonia',6:'letonia',
+              7:'madagascar',7:'guatemala',
+              8:'lituania',9:'laos',
+              10:'botsuana'
+              }
+    return paises
+
+def dicionario_palavras():
+    palavras = {1:'anticonstitucionalissimamente',
+                2:'paraclorobenzilpirrolidinonetilbenzimidazol',
+                3:'xaropear', 4:'quintessencia',5:'vicissitude',
+                6:'tergiversar',7:'putrefato',8:'verossimilhança',
+                9:'zaragatoa',10:'hipopotomonstrosesquipedaliofobia'
+    }
+    return palavras
+
+def pergunta_escolha_tema():
+    escolha_tema = int(input('Escolha um nível de dificuldade:'))
+    if escolha_tema == 1:
+            print('Você escolheu o nível Fácil com o tema Frutas!')
+            lista_com_tema_escolhido.append(dicionario_paises())
+            print(lista_com_tema_escolhido)
+    if escolha_tema == 2:
+            print('Você escolheu o nível Médio com o tema Países!')
+            lista_com_tema_escolhido.append(dicionario_paises())
+            print(lista_com_tema_escolhido)
+    if escolha_tema == 3:
+            print('Você escolheu o nível Difícil com o tema Palavras!')
+            lista_com_tema_escolhido.append(dicionario_palavras())
+            print(lista_com_tema_escolhido)
+    
+    palavra_escolhida = int(input('Digite um nº de 1 a 10 e sortearemos uma palavra:'))
+    palavra_escolhida = lista_com_tema_escolhido[0][palavra_escolhida]
+    print(palavra_escolhida)
+
 
 palavra_secreta_jogador1 = 'abacate'
 palavra_secreta_jogador2 = 'morango'
@@ -8,8 +61,6 @@ palavra_secreta_jogador2 = 'morango'
 letras_acertadas_jogador1 = ['_' for letra in palavra_secreta_jogador1]
 letras_acertadas_jogador2 = ['_' for letra in palavra_secreta_jogador2]
 
-lista_erros_jogador1 = []
-lista_erros_jogador2 = []
 
 def jogar():
     abertura()
@@ -36,6 +87,8 @@ def imprimir_msg_abertura():
 
     print('\nVocê começa jogador1\n')
     sleep(1)
+
+    pergunta_escolha_tema()
 
 
 def contador_lista_erros_jogador1(chute, lista_erros_jogador1):
@@ -112,7 +165,6 @@ def desenha_forca_j1(lista_erros_jogador1):
     print(" |            ")
     print("_|___         ")
     sleep(0.5)
-    
 
 
 
@@ -186,17 +238,17 @@ def p1jogando():
                     if chute == letra:
                         letras_acertadas_jogador1[indice] = letra
                     indice += 1
-            
+
             if (len(lista_erros_jogador1) == len(palavra_secreta_jogador1)):
                 enforcou_jogador1 = True
-            
+
             if '_' not in letras_acertadas_jogador1:
                 acertou_jogador1 = True
                 mensagem_acertou_j1()
 
             else:
                 contador_lista_erros_jogador1(chute, lista_erros_jogador1)
-            
+
     p1jogando = False
 
 
@@ -221,7 +273,7 @@ def p2jogando():
 
             if (len(lista_erros_jogador2) == len(palavra_secreta_jogador2)):
                 enforcou_jogador2 = True
-    
+
             if '_' not in letras_acertadas_jogador2:
                 acertou_jogador2 = True
                 mensagem_acertou_j2()
@@ -239,11 +291,11 @@ def jogar_novamente():
         lista_erros_jogador1.clear()
         lista_erros_jogador2.clear()
         main()
-    
+
     elif (resposta_jogarnovamente).upper() == 'N':
         print('Até a próxima!')
         exit()
-    
+
     else:
         print('Digite uma resposta válida!')
         jogar_novamente()
