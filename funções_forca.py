@@ -132,7 +132,7 @@ def contador_lista_erros_jogador1(chute, lista_erros_jogador1):
             desenha_forca_j1(len(lista_erros_jogador1))
 
             print('\nVez do JOGADOR 2:\n')
-            p2jogando()
+            p2_jogando()
 
 
 def contador_lista_erros_jogador2(chute, lista_erros_jogador2):
@@ -145,7 +145,7 @@ def contador_lista_erros_jogador2(chute, lista_erros_jogador2):
             desenha_forca_j2(len(lista_erros_jogador2))
 
             print('\nVez do JOGADOR 1:\n')
-            p1jogando()
+            p1_jogando()
 
 
 def desenha_forca_j1(lista_erros_jogador1):
@@ -254,7 +254,7 @@ def desenha_forca_j2(lista_erros_jogador2):
     sleep(0.5)
 
 
-def p1jogando():
+def p1_jogando():
     enforcou_jogador1 = False
     acertou_jogador1 = False
 
@@ -282,13 +282,17 @@ def p1jogando():
                 acertou_jogador1 = True
                 mensagem_acertou_j1()
 
+            if chute.isdigit():
+                cprint('\nNúmeros não são aceitos. Digite uma opção válida!', 'red')
+                p1_jogando()
+
             else:
                 contador_lista_erros_jogador1(chute, lista_erros_jogador1)
 
     p1jogando = False
 
 
-def p2jogando():
+def p2_jogando():
     enforcou_jogador2 = False
     acertou_jogador2 = False
 
@@ -315,6 +319,10 @@ def p2jogando():
             if '_' not in letras_acertadas_jogador2:
                 acertou_jogador2 = True
                 mensagem_acertou_j2()
+
+            if chute.isdigit():
+                cprint('\nNúmeros não são aceitos. Digite uma opção válida!', 'red')
+                p2_jogando()
 
             else:
                 contador_lista_erros_jogador2(chute, lista_erros_jogador2)
