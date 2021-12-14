@@ -1,7 +1,6 @@
 from principal_forca_multiplayer import main
 from time import sleep
 from termcolor import cprint
-from random import randint
 
 lista_erros_jogador1 = []
 lista_erros_jogador2 = []
@@ -37,24 +36,43 @@ def dicionario_palavras():
     return palavras
 
 
-def pergunta_escolha_tema():
+def pergunta_escolha_tema_j1():
     dicionario_atual = {}
-    escolha_tema = int(input('Escolha um nível de dificuldade \n[1] Fácil [2] Médio [3] Difícil:'))
+    escolha_tema = int(input('Escolha um nível de dificuldade, jogador1 | \n[1] Fácil [2] Médio [3] Difícil:'))
     if escolha_tema == 1:
-        print('\nVocê escolheu o nível fácil com o tema Frutas!')
+        print('\nJogador 1, você escolheu o nível fácil com o tema Frutas!')
         dicionario_atual = dicionario_comidas()
 
     if escolha_tema == 2:
-        print('\nVocê escolheu o nível médio com o tema Países!')
+        print('\nJogador 1, você escolheu o nível médio com o tema Países!')
         dicionario_atual = dicionario_paises()
 
     if escolha_tema == 3:
-        print('\nVocê escolheu o nível difícil com o tema Palavras!')
+        print('\nJogador 1, você escolheu o nível difícil com o tema Palavras!')
         dicionario_atual = dicionario_palavras()
 
-    palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra:'))
+    palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra, Jogador 1:\n'))
     palavra_escolhida = dicionario_atual[palavra_escolhida]
-    print(palavra_escolhida)
+    return palavra_escolhida
+
+
+def pergunta_escolha_tema_j2():
+    dicionario_atual = {}
+    escolha_tema = int(input('\nEscolha um nível de dificuldade, jogador 2 | \n[1] Fácil [2] Médio [3] Difícil:'))
+    if escolha_tema == 1:
+        print('\nJogador 2, você escolheu o nível fácil com o tema Frutas!')
+        dicionario_atual = dicionario_comidas()
+
+    if escolha_tema == 2:
+        print('\nJogador 2, você escolheu o nível médio com o tema Países!')
+        dicionario_atual = dicionario_paises()
+
+    if escolha_tema == 3:
+        print('\nJogador 2, você escolheu o nível difícil com o tema Palavras!')
+        dicionario_atual = dicionario_palavras()
+
+    palavra_escolhida = int(input('\nDigite um nº de 1 a 10 e sortearemos uma palavra, Jogador 2:\n'))
+    palavra_escolhida = dicionario_atual[palavra_escolhida]
     return palavra_escolhida
 
 
@@ -66,8 +84,8 @@ def jogar():
     global letras_acertadas_jogador1
     global letras_acertadas_jogador2
 
-    palavra_secreta_jogador1 = pergunta_escolha_tema()
-    palavra_secreta_jogador2 = pergunta_escolha_tema()
+    palavra_secreta_jogador1 = pergunta_escolha_tema_j1()
+    palavra_secreta_jogador2 = pergunta_escolha_tema_j2()
     letras_acertadas_jogador1 = ['_' for letra in palavra_secreta_jogador1]
     letras_acertadas_jogador2 = ['_' for letra in palavra_secreta_jogador2]
 
